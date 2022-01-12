@@ -9,9 +9,7 @@ const MovieModel = require("./../models/Movie.model");
 router.get("/movies", async (req, res, next) => {
   try {
     const movies = await MovieModel.find();
-    res.render("movies/movies", {
-      movies,
-    });
+    res.render("movies/movies", { movies });
   } catch (error) {
     next(error);
   }
@@ -36,8 +34,12 @@ router.post("/movies/create", async (req, res, next) => {
 
 // GET movie detail
 router.get("/movies/:id", async (req, res, next) => {
+  console.log(req.body);
   try {
-    res.render("movies/movie-detail", await MovieModel.findById(req.params.id));
+    const movieDetail = await MovieModel.findById(req.params.id).populate(
+      "cast"
+    );
+    res.render("movies/movie-detail", { movieDetail });
   } catch (error) {
     next(error);
   }
