@@ -15,7 +15,6 @@ router.get("/celebrities", async (req, res, next) => {
       // res.render("celebrities/celebrities", {
       //   celebrities: await CelebrityModel.find(),
       // });
-
     });
   } catch (error) {
     next(error);
@@ -36,6 +35,52 @@ router.post("/celebrities/create", async (req, res, next) => {
     res.redirect("/celebrities");
   } catch (error) {
     res.render("celebrities/new-celebrity");
+    next(error);
+  }
+});
+
+// GET celeb detail
+router.get("/celebrities/:id", async (req, res, next) => {
+  // console.log(req.body);
+  // console.log(req.params.id);
+  try {
+    const celebrityDetail = await CelebrityModel.findById(req.params.id);
+    console.log(celebrityDetail);
+    res.render("celebrities/celebrity-details", { celebrityDetail });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET - delete
+router.get("/celebrities/:id/delete", async (req, res, next) => {
+  try {
+    await CelebrityModel.findByIdAndRemove(req.params.id);
+    res.redirect("/celebrities");
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET - update
+router.get("/celebrities/:id/edit", async (req, res, next) => {
+  try {
+    const celebrityDetail = await CelebrityModel.findById(req.params.id);
+    res.render("celebrities/edit-celebrity", { celebrityDetail });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// POST - update
+router.post("/celebrities/:id/edit", async (req, res, next) => {
+  try {
+    console.log(req.body);
+    await CelebrityModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.redirect("/celebrities");
+  } catch (error) {
     next(error);
   }
 });

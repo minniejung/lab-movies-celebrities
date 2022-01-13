@@ -4,6 +4,9 @@
 
 <ul>
 {{#each celebrities}}
-  <li>{{this.name}}</li>
+  <li>{{this.name}}
+    <a href="/celebrities/{{_id}}">Details</a> | 
+    <a href="/celebrities/{{_id}}/delete">Delete</a>
+  </li>
 {{/each}}
 </ul>

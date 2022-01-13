@@ -4,6 +4,9 @@
 
 <ul>
 {{#each movies}}
-  <li>TITLE: {{this.title}} <a href="/movies/{{this._id}}">Details</a> | <a href="/movies/{{this._id}}/delete">Delete</a></li>
+  <li>TITLE: {{this.title}} 
+    <a href="/movies/{{_id}}">Details</a> | 
+    <a href="/movies/{{_id}}/delete">Delete</a>
+  </li>
 {{/each}}
 </ul>

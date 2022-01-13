@@ -1,8 +1,10 @@
-<h2>Movie-details</h2>
+<h2>Details</h2>
+
   <p>TITLE : {{movieDetail.title}}</p>
   <p>GENRE : {{movieDetail.genre}}</p>
   <p>PLOT : {{movieDetail.plot}}</p>
+  <p> {{#each movieDetail.cast}}
+        CAST : {{this.name}}
+      {{/each}}</p> 
 
-{{#each movieDetail.cast}}
-  CAST : [{{this.name}},]
-{{/each}}
+    <a href="/movies/{{movieDetail._id}}/edit">EDIT</a>
